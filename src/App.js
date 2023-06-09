@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import cities from './cities.json';
 
 function App() {
+  
   const [weatherData, setWeatherData] = useState([]);
 const cities = require('./cities.json');
 
@@ -43,9 +44,22 @@ const cities = require('./cities.json');
 
   return (
   <Router>
+    
+    <div className= "logo">
+    <h3>Weather App</h3>
+    </div>
+    <div className="searchBarWrapper">
+    <div className="search-bar">
+      <input type="text" placeholder="Search..." />
+      <button type="button">Search</button>
+    </div>
+    </div>
+
   <div className="app">
+    
       {weatherData.map((item) => (  
-        <Link to={`/weather/${item.cityCode}`}>
+        
+          
         <div className="card" key={item.cityCode}>
           <div className="container">
             <div className="content">
@@ -53,15 +67,12 @@ const cities = require('./cities.json');
               {item.weather && (
                 <>
                 <div className="location">
-                <i className="material-icons sun"></i>
                 {item.weather.name}
               </div>
                   <div className="dateAndTime">
-                    <i className="material-icons sun">date</i>
                     {new Date(item.weather.dt * 1000).toLocaleString()}
                   </div>
                   <div className="description">
-                    <i className="material-icons sun"></i>
                     {item.weather.weather[0].description}
                   </div>
                   <div className="temp">
@@ -76,14 +87,16 @@ const cities = require('./cities.json');
               )}
             </div>
             {item.weather && (
-              <div className="bottom">
-                <div>
-                  <ul>
+              <div className="bottom" >
+               <div className="bottom-list"> 
+               <ul >
                     <li>Pressure: {item.weather.main.pressure}</li>
                     <li>Humidity: {item.weather.main.humidity}%</li>
                     <li>Visibility: {item.weather.visibility}</li>
                   </ul>
-                </div>
+               </div>
+                
+                
                 <div> </div>
                 <div>
                   <ul>
@@ -95,7 +108,7 @@ const cities = require('./cities.json');
             )}
           </div>
         </div>
-        </Link>     
+           
 
       ))}
     </div>
