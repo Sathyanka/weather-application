@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import cities from './cities.json';
 
 function App() {
@@ -17,11 +18,11 @@ const cities = require('./cities.json');
         { CityCode: "2644210", CityName: "Liverpool" },
         { CityCode: "2988507", CityName: "Paris" },
         { CityCode: "2147714", CityName: "Sydney" },
-        { CityCode: "4930956", CityName: "Boston" },
-        { CityCode: "1796236", CityName: "Shanghai" }
       ]; // Extract city codes into an array
 
       const weatherPromises = cities.map(async (city) => {
+        //construct the API URL by combining the city's CityCode, units, and apiKey in the URL template.
+        // This URL is used to fetch the weather data from the OpenWeatherMap API.
         const url = `https://api.openweathermap.org/data/2.5/weather?id=${city.CityCode}&units=${units}&appid=${apiKey}`;
         try {
           const response = await axios.get(url);
@@ -41,23 +42,26 @@ const cities = require('./cities.json');
   }, []);
 
   return (
-    <div className="app">
-      {weatherData.map((item) => (
+  <Router>
+  <div className="app">
+      {weatherData.map((item) => (  
+        <Link to={`/weather/${item.cityCode}`}>
         <div className="card" key={item.cityCode}>
           <div className="container">
             <div className="content">
-              <div className="location">
-                <i className="material-icons sun"></i>
-                {item.cityCode}
-              </div>
+
               {item.weather && (
                 <>
+                <div className="location">
+                <i className="material-icons sun"></i>
+                {item.weather.name}
+              </div>
                   <div className="dateAndTime">
                     <i className="material-icons sun">date</i>
                     {new Date(item.weather.dt * 1000).toLocaleString()}
                   </div>
                   <div className="description">
-                    <i className="material-icons sun">wb_sunny</i>
+                    <i className="material-icons sun"></i>
                     {item.weather.weather[0].description}
                   </div>
                   <div className="temp">
@@ -80,7 +84,7 @@ const cities = require('./cities.json');
                     <li>Visibility: {item.weather.visibility}</li>
                   </ul>
                 </div>
-                <div>2</div>
+                <div> </div>
                 <div>
                   <ul>
                     <li>Sunrise: {new Date(item.weather.sys.sunrise * 1000).toLocaleTimeString()}</li>
@@ -91,8 +95,12 @@ const cities = require('./cities.json');
             )}
           </div>
         </div>
+        </Link>     
+
       ))}
     </div>
+  
+    </Router>
   );
 }
 
