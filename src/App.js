@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+
 import cities from './cities.json';
 
 function App() {
   
-  const [weatherData, setWeatherData] = useState([]);
+const [weatherData, setWeatherData] = useState([]);
 const cities = require('./cities.json');
 
   useEffect(() => {
@@ -48,7 +49,7 @@ const cities = require('./cities.json');
     
     <div className= "logo">
     
-    <img src='./assets/logo.png' alt='addLogo' className='logoImage'/>
+    <img src='./assets/logo.png' alt='addLogo'/>
     <h3>Weather App</h3>
     </div>
     <div className="searchBarWrapper">
@@ -83,9 +84,14 @@ const cities = require('./cities.json');
                     {item.weather.main.temp}
                     <span id="C">&#8451;</span>
                   </div>
-                  <div className="tempMinMax">
-                    {item.weather.main.temp_min} - {item.weather.main.temp_max}
-                    <span id="C">&#8451;</span>
+                  <div className="tempMin">
+                    <span id="C">Temp Min: {item.weather.main.temp_min}
+                    &#8451;
+                    </span>
+                    </div>
+                    <div className="tempMax">
+                    <span id="C">Temp Max: {item.weather.main.temp_max}
+                    &#8451;</span>
                   </div>
                 </>
               )}
@@ -94,15 +100,18 @@ const cities = require('./cities.json');
               <div className="bottom" >
                <div className="bottom-list"> 
                <ul >
-                    <li>Pressure: {item.weather.main.pressure}</li>
+                    <li>Pressure: {item.weather.main.pressure}hPa</li>
                     <li>Humidity: {item.weather.main.humidity}%</li>
-                    <li>Visibility: {item.weather.visibility}</li>
+                    <li>Visibility: {item.weather.visibility/1000}km</li>
                   </ul>
                </div>
-                
-                
-                <div> </div>
-                <div>
+               <div className="vertical"> 
+               <ul >
+                    <li>{item.weather.wind.speed}m/s {item.weather.wind.deg}Degree</li>
+                    
+                  </ul>
+               </div>
+     <div className="vertical">
                   <ul>
                     <li>Sunrise: {new Date(item.weather.sys.sunrise * 1000).toLocaleTimeString()}</li>
                     <li>Sunset: {new Date(item.weather.sys.sunset * 1000).toLocaleTimeString()}</li>
