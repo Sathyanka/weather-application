@@ -43,15 +43,18 @@ const cities = require('./cities.json');
   }, []);
 
   return (
+    
   <Router>
     
     <div className= "logo">
+    
+    <img src='./assets/logo.png' alt='addLogo' className='logoImage'/>
     <h3>Weather App</h3>
     </div>
     <div className="searchBarWrapper">
     <div className="search-bar">
       <input type="text" placeholder="Search..." />
-      <button type="button">Search</button>
+      <button type="button">Add City</button>
     </div>
     </div>
 
@@ -61,6 +64,7 @@ const cities = require('./cities.json');
         
           
         <div className="card" key={item.cityCode}>
+          
           <div className="container">
             <div className="content">
 
@@ -112,7 +116,9 @@ const cities = require('./cities.json');
 
       ))}
     </div>
-  
+    <div class="footer">
+      <p>2021 Fidenz Technology</p>
+    </div>         
     </Router>
   );
 }

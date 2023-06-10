@@ -17,7 +17,7 @@
   display: flex;
   flex-wrap: wrap;
   margin-top: 50px;
- 
+ margin-bottom: 50px;
 }
 
 ul {
@@ -49,17 +49,37 @@ body{
 }
 
 /*  CONTENT  */
-.content{
-width: 579px;
-height: 218px;
-border-radius: 8px 8px  0 0;
-background: linear-gradient(rgba(0, 179, 255, 0.5), rgba(0, 179, 255, 0.5)), url('assets/cloudbg.png');
-background-size: cover;
-background-repeat: no-repeat;
-background-position: center;
-position: relative;
-margin-top: 0;
+.content {
+  width: 579px;
+  height: 218px;
+  border-radius: 8px 8px 0 0;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  position: relative;
+  margin-top: 0;
+}
 
+.container:nth-child(1) {
+  background-image: linear-gradient(rgba(0, 179, 255, 0.5), rgba(0, 179, 255, 0.5)), url('assets/cloudbg.png');
+  /* Adjust the file path as needed */
+}
+
+.container:nth-child(2) {
+  background-image: linear-gradient(rgba(255, 0, 187, 0.5), rgba(255, 0, 136, 0.5)), url('assets/cloudbg.png');
+  /* Adjust the file path as needed */
+}
+.container:nth-child(3) {
+  background-image: linear-gradient(rgba(255, 0, 187, 0.5), rgba(255, 0, 136, 0.5)), url('assets/cloudbg.png');
+  /* Adjust the file path as needed */
+}
+.container:nth-child(4) {
+  background-image: linear-gradient(rgba(255, 0, 187, 0.5), rgba(255, 0, 136, 0.5)), url('assets/cloudbg.png');
+  /* Adjust the file path as needed */
+}
+.container:nth-child(5) {
+  background-image: linear-gradient(rgba(255, 0, 187, 0.5), rgba(255, 0, 136, 0.5)), url('assets/cloudbg.png');
+  /* Adjust the file path as needed */
 }
 .sun{
   z-index: 1000;
@@ -176,11 +196,17 @@ input[type='text'] {
   outline: none;
   background-color: #0d1013;
 }
-
-
-@keyframes enlarge{
-  50%{
-      transform: scale(1.2);
+.footer {
+  background-color: #121111;
+  padding: 10px;
+  text-align: center;
+  
+}
+@media screen and (max-width: 600px) {
+  .app{
+    width: 100%;
   }
 }
+
+
 
