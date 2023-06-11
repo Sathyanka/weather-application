@@ -54,7 +54,8 @@ function App() {
       <div className="app">
         {weatherData.map((item) => (
           <Link to={`/weather/${item.city}`} key={item.cityCode}>
-            {    <div className="app">
+            {    
+            <div className="app">
       <div className="card">
         <div className="container">
           <div className="content">
@@ -115,7 +116,7 @@ function App() {
         ))}
       </div>
       <Routes>
-        <Route path="/weather/:city/">
+        <Route path="/weather/:city/CityWeatherDetails.js">
           <Route component={WeatherDetail} weatherData={weatherData} />
         </Route>
       </Routes>
