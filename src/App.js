@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
-
+import { BrowserRouter as Router, Switch, Route, Link,Routes } from 'react-router-dom';
+import WeatherDetail from './pages/CityWeatherDetails'
 import cities from './cities.json';
 
 function App() {
@@ -63,8 +63,8 @@ const cities = require('./cities.json');
     
       {weatherData.map((item) => (  
         
-          
-        <div className="card" key={item.cityCode}>
+        <Link to={`/weather/${item.city}`} key={item.cityCode}>
+          <div className="card" key={item.cityCode}>
           
           <div className="container">
             <div className="content">
@@ -111,7 +111,7 @@ const cities = require('./cities.json');
                     
                   </ul>
                </div>
-     <div className="vertical">
+              <div className="vertical">
                   <ul>
                     <li>Sunrise: {new Date(item.weather.sys.sunrise * 1000).toLocaleTimeString()}</li>
                     <li>Sunset: {new Date(item.weather.sys.sunset * 1000).toLocaleTimeString()}</li>
@@ -121,13 +121,22 @@ const cities = require('./cities.json');
             )}
           </div>
         </div>
-           
+        </Link> 
+
+              
 
       ))}
     </div>
+    <Routes>
+    <Route path="/weather/:city">
+          <CityWeatherDetails weatherData={weatherData} />
+        </Route>
+    </Routes>
     <div class="footer">
       <p>2021 Fidenz Technology</p>
-    </div>         
+    </div>  
+
+    
     </Router>
   );
 }
