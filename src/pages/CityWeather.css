@@ -1,0 +1,18 @@
+.app {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 50px;
+   margin-bottom: 50px;
+  }
+  
+  ul {
+    list-style: none;
+  }
+  
+  body{
+    margin: 1px 0;
+    background-color: #080808;
+    background-image: url('assets/Headerbg.png');
+    background-repeat: no-repeat; /* Prevent the image from repeating */
+   
+  }

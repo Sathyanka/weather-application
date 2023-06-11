@@ -1,7 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { useParams } from 'react-router-dom';
-
-
 
 export default function CityWeatherDetails({ weatherData }) {
   const { city } = useParams();
@@ -14,76 +12,62 @@ export default function CityWeatherDetails({ weatherData }) {
   }
 
   return (
-    <div>
-      {  <div className="app">
-    
-    {weatherData.map((item) => (       
-        <div className="card" key={item.cityCode}>
-        
+    <div className="app">
+      <div className="card">
         <div className="container">
           <div className="content">
-
-            {item.weather && (
+            {selectedWeather.weather && (
               <>
-              <div className="location">
-              {item.weather.name}
-            </div>
+                <div className="location">{selectedWeather.weather.name}</div>
                 <div className="dateAndTime">
-                  {new Date(item.weather.dt * 1000).toLocaleString()}
+                  {new Date(selectedWeather.weather.dt * 1000).toLocaleString()}
                 </div>
                 <div className="description">
-                  {item.weather.weather[0].description}
+                  {selectedWeather.weather.weather[0].description}
                 </div>
                 <div className="temp">
-                  {item.weather.main.temp}
+                  {selectedWeather.weather.main.temp}
                   <span id="C">&#8451;</span>
                 </div>
                 <div className="tempMin">
-                  <span id="C">Temp Min: {item.weather.main.temp_min}
-                  &#8451;
-                  </span>
-                  </div>
-                  <div className="tempMax">
-                  <span id="C">Temp Max: {item.weather.main.temp_max}
-                  &#8451;</span>
+                  <span id="C">Temp Min: {selectedWeather.weather.main.temp_min}&#8451;</span>
+                </div>
+                <div className="tempMax">
+                  <span id="C">Temp Max: {selectedWeather.weather.main.temp_max}&#8451;</span>
                 </div>
               </>
             )}
           </div>
-          {item.weather && (
-            <div className="bottom" >
-             <div className="bottom-list"> 
-             <ul >
-                  <li>Pressure: {item.weather.main.pressure}hPa</li>
-                  <li>Humidity: {item.weather.main.humidity}%</li>
-                  <li>Visibility: {item.weather.visibility/1000}km</li>
-                </ul>
-             </div>
-             <div className="vertical"> 
-             <ul >
-                  <li>{item.weather.wind.speed}m/s {item.weather.wind.deg}Degree</li>
-                  
-                </ul>
-             </div>
-            <div className="vertical">
+          {selectedWeather.weather && (
+            <div className="bottom">
+              <div className="bottom-list">
                 <ul>
-                  <li>Sunrise: {new Date(item.weather.sys.sunrise * 1000).toLocaleTimeString()}</li>
-                  <li>Sunset: {new Date(item.weather.sys.sunset * 1000).toLocaleTimeString()}</li>
+                  <li>Pressure: {selectedWeather.weather.main.pressure}hPa</li>
+                  <li>Humidity: {selectedWeather.weather.main.humidity}%</li>
+                  <li>Visibility: {selectedWeather.weather.visibility / 1000}km</li>
+                </ul>
+              </div>
+              <div className="vertical">
+                <ul>
+                  <li>
+                    {selectedWeather.weather.wind.speed}m/s {selectedWeather.weather.wind.deg}Degree
+                  </li>
+                </ul>
+              </div>
+              <div className="vertical">
+                <ul>
+                  <li>
+                    Sunrise: {new Date(selectedWeather.weather.sys.sunrise * 1000).toLocaleTimeString()}
+                  </li>
+                  <li>
+                    Sunset: {new Date(selectedWeather.weather.sys.sunset * 1000).toLocaleTimeString()}
+                  </li>
                 </ul>
               </div>
             </div>
           )}
         </div>
       </div>
-     
-
-            
-
-    ))}
-  </div>}
     </div>
   );
 }
-
-  
-  

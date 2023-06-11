@@ -1,13 +1,11 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { BrowserRouter as Router, Switch, Route, Link,Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route, Link, Routes } from 'react-router-dom';
 import WeatherDetail from './pages/CityWeatherDetails'
 import cities from './cities.json';
 
 function App() {
-  
-const [weatherData, setWeatherData] = useState([]);
-const cities = require('./cities.json');
+  const [weatherData, setWeatherData] = useState([]);
 
   useEffect(() => {
     const fetchWeatherData = async () => {
@@ -23,8 +21,6 @@ const cities = require('./cities.json');
       ]; // Extract city codes into an array
 
       const weatherPromises = cities.map(async (city) => {
-        //construct the API URL by combining the city's CityCode, units, and apiKey in the URL template.
-        // This URL is used to fetch the weather data from the OpenWeatherMap API.
         const url = `https://api.openweathermap.org/data/2.5/weather?id=${city.CityCode}&units=${units}&appid=${apiKey}`;
         try {
           const response = await axios.get(url);
@@ -44,99 +40,88 @@ const cities = require('./cities.json');
   }, []);
 
   return (
-    
-  <Router>
-    
-    <div className= "logo">
-    
-    <img src='./assets/logo.png' alt='addLogo'/>
-    <h3>Weather App</h3>
-    </div>
-    <div className="searchBarWrapper">
-    <div className="search-bar">
-      <input type="text" placeholder="Search..." />
-      <button type="button">Add City</button>
-    </div>
-    </div>
-
-  <div className="app">
-    
-      {weatherData.map((item) => (  
-        
-        <Link to={`/weather/${item.city}`} key={item.cityCode}>
-          <div className="card" key={item.cityCode}>
-          
-          <div className="container">
-            <div className="content">
-
-              {item.weather && (
-                <>
-                <div className="location">
-                {item.weather.name}
-              </div>
-                  <div className="dateAndTime">
-                    {new Date(item.weather.dt * 1000).toLocaleString()}
-                  </div>
-                  <div className="description">
-                    {item.weather.weather[0].description}
-                  </div>
-                  <div className="temp">
-                    {item.weather.main.temp}
-                    <span id="C">&#8451;</span>
-                  </div>
-                  <div className="tempMin">
-                    <span id="C">Temp Min: {item.weather.main.temp_min}
-                    &#8451;
-                    </span>
-                    </div>
-                    <div className="tempMax">
-                    <span id="C">Temp Max: {item.weather.main.temp_max}
-                    &#8451;</span>
-                  </div>
-                </>
-              )}
-            </div>
-            {item.weather && (
-              <div className="bottom" >
-               <div className="bottom-list"> 
-               <ul >
-                    <li>Pressure: {item.weather.main.pressure}hPa</li>
-                    <li>Humidity: {item.weather.main.humidity}%</li>
-                    <li>Visibility: {item.weather.visibility/1000}km</li>
-                  </ul>
-               </div>
-               <div className="vertical"> 
-               <ul >
-                    <li>{item.weather.wind.speed}m/s {item.weather.wind.deg}Degree</li>
-                    
-                  </ul>
-               </div>
-              <div className="vertical">
-                  <ul>
-                    <li>Sunrise: {new Date(item.weather.sys.sunrise * 1000).toLocaleTimeString()}</li>
-                    <li>Sunset: {new Date(item.weather.sys.sunset * 1000).toLocaleTimeString()}</li>
-                  </ul>
+    <Router>
+      <div className="logo">
+        <img src='./assets/logo.png' alt='addLogo'/>
+        <h3>Weather App</h3>
+      </div>
+      <div className="searchBarWrapper">
+        <div className="search-bar">
+          <input type="text" placeholder="Search..." />
+          <button type="button">Add City</button>
+        </div>
+      </div>
+      <div className="app">
+        {weatherData.map((item) => (
+          <Link to={`/weather/${item.city}`} key={item.cityCode}>
+            {    <div className="app">
+      <div className="card">
+        <div className="container">
+          <div className="content">
+            {weatherData.weather && (
+              <>
+                <div className="location">{weatherData.weather.name}</div>
+                <div className="dateAndTime">
+                  {new Date(weatherData.weather.dt * 1000).toLocaleString()}
                 </div>
-              </div>
+                <div className="description">
+                  {weatherData.weather.weather[0].description}
+                </div>
+                <div className="temp">
+                  {weatherData.weather.main.temp}
+                  <span id="C">&#8451;</span>
+                </div>
+                <div className="tempMin">
+                  <span id="C">Temp Min: {weatherData.weather.main.temp_min}&#8451;</span>
+                </div>
+                <div className="tempMax">
+                  <span id="C">Temp Max: {weatherData.weather.main.temp_max}&#8451;</span>
+                </div>
+              </>
             )}
           </div>
+          {weatherData.weather && (
+            <div className="bottom">
+              <div className="bottom-list">
+                <ul>
+                  <li>Pressure: {weatherData.weather.main.pressure}hPa</li>
+                  <li>Humidity: {weatherData.weather.main.humidity}%</li>
+                  <li>Visibility: {weatherData.weather.visibility / 1000}km</li>
+                </ul>
+              </div>
+              <div className="vertical">
+                <ul>
+                  <li>
+                    {weatherData.weather.wind.speed}m/s {weatherData.weather.wind.deg}Degree
+                  </li>
+                </ul>
+              </div>
+              <div className="vertical">
+                <ul>
+                  <li>
+                    Sunrise: {new Date(weatherData.weather.sys.sunrise * 1000).toLocaleTimeString()}
+                  </li>
+                  <li>
+                    Sunset: {new Date(weatherData.weather.sys.sunset * 1000).toLocaleTimeString()}
+                  </li>
+                </ul>
+              </div>
+            </div>
+          )}
         </div>
-        </Link> 
-
-              
-
-      ))}
-    </div>
-    <Routes>
-    <Route path="/weather/:city">
-          <CityWeatherDetails weatherData={weatherData} />
+      </div>
+    </div>}
+          </Link>
+        ))}
+      </div>
+      <Routes>
+        <Route path="/weather/:city/">
+          <Route component={WeatherDetail} weatherData={weatherData} />
         </Route>
-    </Routes>
-    <div class="footer">
-      <p>2021 Fidenz Technology</p>
-    </div>  
-
-    
+      </Routes>
+      <div className="footer">
+        <p>2021 Fidenz Technology</p>
+      </div>
     </Router>
   );
 }
