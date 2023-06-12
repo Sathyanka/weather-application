@@ -1,5 +1,5 @@
 import React from 'react';
-import './weatherDetailsCard.css'
+import './weatherDetailsCard.css';
 import { Link } from 'react-router-dom';
 
 export default function WeatherDetailsCard({ weatherData }) {
