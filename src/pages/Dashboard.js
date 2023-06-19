@@ -55,7 +55,7 @@ export default function Dashboard() {
   return (
     <div className="body">
       <div className="logo">
-        <img src="../assets/logo.png" alt="addLogo" />
+        <div className="logoImg"></div>
         <h3>Weather App</h3>
       </div>
       <div className="searchBarWrapper">

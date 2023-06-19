@@ -1,13 +1,15 @@
 import React from "react";
 import "./weatherDetailsCard.css";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export default function WeatherDetailsCard({ weatherData, backgroundImage }) {
+  const navigate = useNavigate();
   if (!weatherData || !weatherData.weather || !weatherData.weather.main) {
     return <div>Loading...</div>;
   }
+
   const handleClick = () => {
-    window.location.href = `./pages/CityWeather/${weatherData.cityCode}`;
+    navigate(`/pages/CityWeather/${weatherData.cityCode}`);
   };
 
   return (
