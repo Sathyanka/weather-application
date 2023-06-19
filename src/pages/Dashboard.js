@@ -1,34 +1,47 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import WeatherDetailsCard from "../components/WeatherDetailsCard.js";
-import Footer from '../components/Footer.js';
-import './dashboard.css';
+import Footer from "../components/Footer.js";
+import "./dashboard.css";
+import { cities } from "../constants";
+import { constructWeatherAPIUrl } from "../APIHelper";
+// import dotenv from "dotenv";
 
 export default function Dashboard() {
+  // dotenv.config();
   const [weatherData, setWeatherData] = useState([]);
+  const [cache, setCache] = useState({}); // State variable to store cached data
 
   useEffect(() => {
+    const fetchData = async (city) => {
+      const url = constructWeatherAPIUrl(city.CityCode);
+      try {
+        const response = await axios.get(url);
+        const weather = response.data;
+        return { city: city.CityName, weather };
+      } catch (error) {
+        console.error(`Error fetching weather for ${city.CityName}:`, error);
+        return { city: city.CityName, weather: null };
+      }
+    };
+
     const fetchWeatherData = async () => {
-      const units = "metric";
-      const apiKey = "4dbf75b784feeee807f8bf633951ae8e";
-
-      const cities = [
-        { CityCode: "1248991", CityName: "Colombo" },
-        { CityCode: "1850147", CityName: "Tokyo" },
-        { CityCode: "2644210", CityName: "Liverpool" },
-        { CityCode: "2988507", CityName: "Paris" },
-        { CityCode: "2147714", CityName: "Sydney" },
-      ];
-
       const weatherPromises = cities.map(async (city) => {
-        const url = `https://api.openweathermap.org/data/2.5/weather?id=${city.CityCode}&units=${units}&appid=${apiKey}`;
-        try {
-          const response = await axios.get(url);
-          const weather = response.data;
-          return { city: city.CityName, weather };
-        } catch (error) {
-          console.error(`Error fetching weather for ${city.CityName}:`, error);
-          return { city: city.CityName, weather: null };
+        if (
+          cache[city.CityCode] &&
+          cache[city.CityCode].expiresAt > Date.now()
+        ) {
+          // If data is available in cache and not expired, use cached data
+          return { city: city.CityName, weather: cache[city.CityCode].data };
+        } else {
+          // Fetch data from API and update cache
+          const weather = await fetchData(city);
+          const expiresAt = Date.now() + 5 * 60 * 1000; // Set cache expiration to 5 minutes
+          setCache((prevCache) => ({
+            ...prevCache,
+            [city.CityCode]: { data: weather.weather, expiresAt },
+          }));
+          return weather;
         }
       });
 
@@ -41,8 +54,8 @@ export default function Dashboard() {
 
   return (
     <div className="body">
-              <div className="logo">
-        <img src="./assets/logo.png" alt='addLogo'/>
+      <div className="logo">
+        <img src="./" alt="addLogo" />
         <h3>Weather App</h3>
       </div>
       <div className="searchBarWrapper">
@@ -54,7 +67,7 @@ export default function Dashboard() {
       {weatherData.map((data) => (
         <WeatherDetailsCard key={data.cityCode} weatherData={data} />
       ))}
-      <Footer/>
+      <Footer />
     </div>
   );
 }
