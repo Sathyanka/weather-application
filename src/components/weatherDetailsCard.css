@@ -1,0 +1,189 @@
+.card-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  justify-items: center;
+  cursor: pointer;
+}
+
+.container {
+  position: relative;
+  margin-top: 49px;
+  margin-left: 69px;
+  height: 368px;
+  width: 579px;
+  max-width: 50rem;
+  border-radius: 10px;
+  box-shadow: 2px 2px 1px rgba(0, 0, 0, 0.2);
+}
+
+.content {
+  max-width: 50rem;
+  width: 579px;
+  height: 218px;
+  border-radius: 8px 8px 0 0;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  position: relative;
+  margin-top: 0;
+}
+
+.sun {
+  z-index: 1000;
+  font-size: 15px !important;
+}
+
+.location {
+  position: absolute;
+  font-family: "Roboto", sans-serif;
+  font-weight: 100;
+  font-size: 20px;
+  width: 177px;
+  height: 26px;
+  left: 69px;
+  top: 49px;
+}
+
+.dateAndTime {
+  position: absolute;
+  font-family: "Roboto", sans-serif;
+  font-weight: 30;
+  font-size: 12px;
+  width: 150px;
+  height: 16px;
+  left: 80px;
+  top: 91px;
+}
+.description {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  font-family: "Roboto", sans-serif;
+  font-weight: 20;
+  font-size: 14px;
+  width: 200px;
+  height: 60px;
+  left: 50px;
+  top: 110px;
+}
+.temp {
+  z-index: 1000;
+  width: 126px;
+  height: 48px;
+  position: absolute;
+  font-family: "Noto Sans", sans-serif;
+  font-size: 44px;
+  font-weight: 20;
+  right: 100px;
+  top: 48px;
+}
+.tempMax {
+  z-index: 1000;
+  width: 130px;
+  height: 40px;
+  position: absolute;
+  font-family: "Noto Sans", sans-serif;
+  font-size: 14px;
+  font-weight: 100;
+  right: 110px;
+  top: 150px;
+}
+
+.tempMin {
+  z-index: 1000;
+  width: 130px;
+  height: 40px;
+  position: absolute;
+  font-family: "Noto Sans", sans-serif;
+  font-size: 14px;
+  font-weight: 100;
+  right: 110px;
+  top: 110px;
+}
+.bottom {
+  width: 579px;
+  height: 151px;
+  border-radius: 8px;
+  background-color: #383b47;
+  display: grid;
+  justify-content: center;
+  grid-template-columns: repeat(3, 160px);
+  gap: 2px;
+  border-radius: 0 0 10px 10px;
+  position: relative;
+  font-family: "Noto Sans", sans-serif;
+}
+.bottom > div {
+  list-style: none;
+  text-align: left;
+  padding: 20px 4px;
+  font-size: 14px;
+  justify-content: center;
+  margin: 5px;
+  height: 50%;
+  bottom: 5px;
+  top: 5px;
+}
+.vertical {
+  border-left: 1px solid rgb(134, 134, 149);
+  height: 50px;
+  position: relative;
+  margin-left: -6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+ul {
+  list-style-type: none;
+}
+/* Responsive Adjustments */
+
+@media screen and (max-width: 768px) {
+  .container {
+    width: 100%;
+    margin-left: 0;
+  }
+
+  .content {
+    width: 100%;
+  }
+
+  .temp,
+  .tempMax,
+  .tempMin {
+    right: 50%;
+    transform: translateX(50%);
+  }
+
+  .bottom {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .card-container {
+    grid-template-columns: 1fr;
+  }
+
+  .container {
+    width: 100%;
+    margin-left: 0;
+  }
+
+  .content {
+    width: 100%;
+  }
+
+  .temp,
+  .tempMax,
+  .tempMin {
+    right: 50%;
+    transform: translateX(50%);
+  }
+
+  .bottom {
+    width: 100%;
+  }
+}
