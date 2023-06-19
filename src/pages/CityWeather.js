@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { constructWeatherAPIUrl } from "../APIHelper";
 import axios from "axios";
-import { useParams } from "react-router-dom";
 import WeatherDetailsCard from "../components/WeatherDetailsCard";
 import "./CityWeather.css";
 import { cities, backgroundImageArray } from "../constants";

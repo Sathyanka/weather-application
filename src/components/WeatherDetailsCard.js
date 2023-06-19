@@ -9,12 +9,17 @@ export default function WeatherDetailsCard({ weatherData, backgroundImage }) {
   }
 
   const handleClick = () => {
-    navigate(`/pages/CityWeather/${weatherData.cityCode}`);
+    navigate(`/pages/CityWeather${weatherData.cityCode}`);
   };
 
   return (
     <div className="card" key={weatherData.cityCode} onClick={handleClick}>
-      <div className="container" style={{ backgroundImage: backgroundImage }}>
+      <div
+        className="container"
+        style={{
+          backgroundImage,
+        }}
+      >
         <div className="content">
           <div className="location">{weatherData.weather.name}</div>
 
