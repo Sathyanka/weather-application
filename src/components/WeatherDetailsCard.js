@@ -2,7 +2,7 @@ import React from "react";
 import "./weatherDetailsCard.css";
 import { Link } from "react-router-dom";
 
-export default function WeatherDetailsCard({ weatherData }) {
+export default function WeatherDetailsCard({ weatherData, backgroundImage }) {
   if (!weatherData || !weatherData.weather || !weatherData.weather.main) {
     return <div>Loading...</div>;
   }
@@ -12,7 +12,7 @@ export default function WeatherDetailsCard({ weatherData }) {
 
   return (
     <div className="card" key={weatherData.cityCode} onClick={handleClick}>
-      <div className="container">
+      <div className="container" style={{ backgroundImage: backgroundImage }}>
         <div className="content">
           <div className="location">{weatherData.weather.name}</div>
 

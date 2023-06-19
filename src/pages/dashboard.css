@@ -10,8 +10,8 @@
   flex-wrap: wrap;
   margin-top: 50px;
   margin-bottom: 50px;
-  margin: 1px 0;
-  background-color: #080808;
+  margin: 0px 0;
+  background-color: #2d2c2c;
   background-image: url("../assets/Headerbg.png");
   background-repeat: no-repeat; /* Prevent the image from repeating */
 }

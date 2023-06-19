@@ -3,7 +3,7 @@ import axios from "axios";
 import WeatherDetailsCard from "../components/WeatherDetailsCard.js";
 import Footer from "../components/Footer.js";
 import "./dashboard.css";
-import { cities } from "../constants";
+import { cities, backgroundImageArray } from "../constants";
 import { constructWeatherAPIUrl } from "../APIHelper";
 // import dotenv from "dotenv";
 
@@ -55,7 +55,7 @@ export default function Dashboard() {
   return (
     <div className="body">
       <div className="logo">
-        <img src="./" alt="addLogo" />
+        <img src="../assets/logo.png" alt="addLogo" />
         <h3>Weather App</h3>
       </div>
       <div className="searchBarWrapper">
@@ -64,9 +64,14 @@ export default function Dashboard() {
           <button type="button">Add City</button>
         </div>
       </div>
-      {weatherData.map((data) => (
-        <WeatherDetailsCard key={data.cityCode} weatherData={data} />
+      {weatherData.map((data, index) => (
+        <WeatherDetailsCard
+          key={data.cityCode}
+          weatherData={data}
+          backgroundImage={backgroundImageArray[index]}
+        />
       ))}
+
       <Footer />
     </div>
   );
